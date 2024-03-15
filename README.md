@@ -202,35 +202,24 @@ same process for the remaining plain text characters.
 
 ### PROGRAM :
 
-```from Crypto.Cipher import DES
-from Crypto.Random import get_random_bytes
-def encrypt_message(message, key):
- cipher = DES.new(key, DES.MODE_ECB)
- padded_message = message + b"\0" * (8 - len(message) % 8) # Padding the message if 
-needed
- encrypted_message = cipher.encrypt(padded_message)
- return encrypted_message
-def decrypt_message(encrypted_message, key):
- cipher = DES.new(key, DES.MODE_ECB)
- decrypted_message = cipher.decrypt(encrypted_message)
- return decrypted_message.rstrip(b"\0") # Removing padding from decrypted message
-def main():
- print("Message Encryption Using DES Algorithm\n")
- key = get_random_bytes(8)
- print("Secret Key:", key.hex())
- message = b"Secret Information"
- print("Original Message:", message.decode())
- encrypted_message = encrypt_message(message, key)
- print("Encrypted Message (in bytes):", encrypted_message.hex())
- decrypted_message = decrypt_message(encrypted_message, key)
- print("Decrypted Message:", decrypted_message.decode())
-if __name__ == "__main__":
- main()
+```
+from cryptography.fernet import Fernet
+message = input()
+key = Fernet.generate_key()
+fernet = Fernet(key)
+encMessage = fernet.encrypt(message.encode())
+print("original string: ", message)
+print("encrypted string: ", encMessage)
+
+decMessage = fernet.decrypt(encMessage).decode()
+ 
+print("decrypted string: ", decMessage)
 
 ```
 ## OUTPUT:
 
-<img width="756" alt="image" src="https://github.com/AlluguriSrikrishnateja/19CS412---CRYPTOGRAPHY---ADVANCED-ENCRYPTION/assets/118343892/23e74c08-7cea-4381-b9fe-97e247b17470">
+![des output](https://github.com/Prem-Kumar13122004/cns-exp-2/assets/119291590/ce8fa3e5-fd7f-4f07-a4b1-420f16389262)
+
 
 ## RESULT:
 
