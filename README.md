@@ -123,16 +123,13 @@ a mod p.
 
 STEP-4: Then Alice sends A to Bob.
 
-
 STEP-5: Similarly Bob also selects a public key b and computes his secret
 key as B and sends the same back to Alice.
-
 
 STEP-6: Now both of them compute their common secret key as the other
 one’s secret key power of a mod p.
 
 ## PROGRAM: 
-
 ```
 #include <math.h>
 #include <stdio.h>
@@ -172,14 +169,12 @@ printf("Secret key for the Alice is : %lld\n", ka);
 printf("Secret Key for the Bob is : %lld\n", kb);
 return 0;
 }
-
 ```
 ## OUTPUT:
 
 ![diffie output](https://github.com/Prem-Kumar13122004/cns-exp-2/assets/119291590/1966a44c-b01c-46f2-8633-2170bbf71f6f)
 
 ## RESULT: 
-
 Thus the Diffie-Hellman key exchange algorithm had been successfully
 implemented using C.
 
