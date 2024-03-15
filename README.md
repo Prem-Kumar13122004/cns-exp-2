@@ -83,9 +83,11 @@ int decryptedMessage = decrypt(ciphertext, d, n);
 printf("Decrypted message: %d\n", decryptedMessage);
 return 0;
 }
+
 ```
 ## OUTPUT:
-![Screenshot 2024-03-05 113517](https://github.com/AlluguriSrikrishnateja/19CS412---CRYPTOGRAPHY---ADVANCED-ENCRYPTION/assets/118343892/b96f8704-db74-4fb0-835d-078d58644625)
+![rsa output](https://github.com/Prem-Kumar13122004/cns-exp-2/assets/119291590/5a86b55a-d8b8-4873-9df5-ea5c846a7c02)
+
 
 
 ## RESULT :
@@ -164,11 +166,11 @@ printf("Secret key for the Alice is : %lld\n", ka);
 printf("Secret Key for the Bob is : %lld\n", kb);
 return 0;
 }
+
 ```
 ## OUTPUT:
 
-<img width="342" alt="image" src="https://github.com/AlluguriSrikrishnateja/19CS412---CRYPTOGRAPHY---ADVANCED-ENCRYPTION/assets/118343892/a3f5b0fa-ef81-4215-9521-2a16c87cef68">
-
+![diffie output](https://github.com/Prem-Kumar13122004/cns-exp-2/assets/119291590/1966a44c-b01c-46f2-8633-2170bbf71f6f)
 
 ## RESULT: 
 
@@ -200,18 +202,31 @@ same process for the remaining plain text characters.
 
 ### PROGRAM :
 
-```
-from cryptography.fernet import Fernet
-message = input()
-key = Fernet.generate_key()
-fernet = Fernet(key)
-encMessage = fernet.encrypt(message.encode())
-print("original string: ", message)
-print("encrypted string: ", encMessage)
+```from Crypto.Cipher import DES
+from Crypto.Random import get_random_bytes
+def encrypt_message(message, key):
+ cipher = DES.new(key, DES.MODE_ECB)
+ padded_message = message + b"\0" * (8 - len(message) % 8) # Padding the message if 
+needed
+ encrypted_message = cipher.encrypt(padded_message)
+ return encrypted_message
+def decrypt_message(encrypted_message, key):
+ cipher = DES.new(key, DES.MODE_ECB)
+ decrypted_message = cipher.decrypt(encrypted_message)
+ return decrypted_message.rstrip(b"\0") # Removing padding from decrypted message
+def main():
+ print("Message Encryption Using DES Algorithm\n")
+ key = get_random_bytes(8)
+ print("Secret Key:", key.hex())
+ message = b"Secret Information"
+ print("Original Message:", message.decode())
+ encrypted_message = encrypt_message(message, key)
+ print("Encrypted Message (in bytes):", encrypted_message.hex())
+ decrypted_message = decrypt_message(encrypted_message, key)
+ print("Decrypted Message:", decrypted_message.decode())
+if __name__ == "__main__":
+ main()
 
-decMessage = fernet.decrypt(encMessage).decode()
- 
-print("decrypted string: ", decMessage)
 ```
 ## OUTPUT:
 
